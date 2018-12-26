@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   get '/category_properties'  => 'category_properties#index'
   get '/coverages'            => 'coverages#index'
   get '/assistances'          => 'assistances#index'
+
+  post '/quotes'              => 'quotes#create'
 end

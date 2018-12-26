@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  phone: MyString
+  zipcode: MyString
+  type_of_property: MyString
+  gated_community: false
+  main_home: false
+  approximate_value: 9.99
+  insurance_with_another_insurer: false
+  user: one
+
+two:
+  name: MyString
+  email: MyString
+  phone: MyString
+  zipcode: MyString
+  type_of_property: MyString
+  gated_community: false
+  main_home: false
+  approximate_value: 9.99
+  insurance_with_another_insurer: false
+  user: two
