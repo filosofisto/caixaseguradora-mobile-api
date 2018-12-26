@@ -1,0 +1,2 @@
+class CategoryProperty < ApplicationRecord
+end

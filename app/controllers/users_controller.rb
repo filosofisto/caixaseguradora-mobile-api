@@ -1,12 +1,16 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   # Use Knock to make sure the current_user is authenticated before completing request.
-  before_action :authorize_as_admin,  only: [:index, :destroy]
+  #before_action :authorize_as_admin,  only: [:index, :destroy]
   before_action :authenticate_user,   only: [:update, :update_password, :current]
   before_action :authorize,           only: [:update]
 
   # Should work if the current_user is authenticated.
   # GET /users
   def index
+    raise NotImplementedError
+
     @users = User.all
     json_response(@users)
   end
@@ -46,6 +50,8 @@ class UsersController < ApplicationController
 =end
 
   def destroy
+    raise NotImplementedError
+
     user = User.find(params[:id])
     if user.destroy
       render json: {status: 200, message: 'Usuário excluído com sucesso'}

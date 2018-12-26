@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   protected
 
   # Method for checking if current_user is admin or not.
+=begin
   def authorize_as_admin
     return_unauthorized unless current_user_is_admin
   end
@@ -18,4 +19,5 @@ class ApplicationController < ActionController::Base
   def current_user_is_admin
     !current_user.nil? && current_user.is_admin?
   end
+=end
 end

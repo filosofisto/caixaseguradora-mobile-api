@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   post 'user_token' => 'user_token#create'
 
   # User actions
-  get     '/users'              => 'users#index'
+  #get     '/users'              => 'users#index'
   get     '/users/current'      => 'users#current'
   post    '/users'              => 'users#create'
   patch   '/users/password/:id' => 'users#update_password'
   patch   '/users/:id'          => 'users#update'
-  delete  '/users/:id'          => 'users#destroy'
+  #delete  '/users/:id'          => 'users#destroy'
+
+  get '/category_properties'  => 'category_properties#index'
+  get '/coverages'            => 'coverages#index'
+  get '/assistances'          => 'assistances#index'
 end

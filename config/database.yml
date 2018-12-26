@@ -12,7 +12,7 @@ default: &default
 development:
   <<: *default
   username: csfabric_develop_user
-  #password: 123456
+  password: 12345678
   database: csfabric_develop
   #database: db/development.sqlite3
 
