@@ -10,18 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_27_102830) do
+ActiveRecord::Schema.define(version: 2018_12_27_171134) do
 
   create_table "assistance_packages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 50, null: false
     t.decimal "value", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "ap_index", unique: true
   end
 
   create_table "assistance_packages_assistances", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "assistance_package_id", null: false
     t.bigint "assistance_id", null: false
+    t.index ["assistance_package_id", "assistance_id"], name: "apa_index", unique: true
+  end
+
+  create_table "assistance_packages_quotes", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "quote_id", null: false
+    t.bigint "assistance_package_id", null: false
+    t.index ["assistance_package_id", "quote_id"], name: "apq_index", unique: true
   end
 
   create_table "assistances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -31,17 +39,26 @@ ActiveRecord::Schema.define(version: 2018_12_27_102830) do
     t.boolean "included"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "a_index", unique: true
+  end
+
+  create_table "assistances_quotes", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "quote_id", null: false
+    t.bigint "assistance_id", null: false
+    t.index ["assistance_id", "quote_id"], name: "aq_index", unique: true
   end
 
   create_table "category_properties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "cp_index", unique: true
   end
 
   create_table "category_properties_quotes", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "quote_id", null: false
     t.bigint "category_property_id", null: false
+    t.index ["category_property_id", "quote_id"], name: "cpq_index", unique: true
   end
 
   create_table "coverages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -52,6 +69,13 @@ ActiveRecord::Schema.define(version: 2018_12_27_102830) do
     t.datetime "updated_at", null: false
     t.string "name", limit: 100
     t.string "description", limit: 500
+    t.index ["name"], name: "c_index", unique: true
+  end
+
+  create_table "coverages_quotes", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "quote_id", null: false
+    t.bigint "coverage_id", null: false
+    t.index ["coverage_id", "quote_id"], name: "cq_index", unique: true
   end
 
   create_table "quotes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -67,6 +91,8 @@ ActiveRecord::Schema.define(version: 2018_12_27_102830) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "calculate_for_years"
+    t.index ["name"], name: "q_index", unique: true
     t.index ["user_id"], name: "index_quotes_on_user_id"
   end
 
@@ -76,6 +102,7 @@ ActiveRecord::Schema.define(version: 2018_12_27_102830) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "last_login"
+    t.index ["email"], name: "u_index", unique: true
   end
 
   add_foreign_key "quotes", "users"

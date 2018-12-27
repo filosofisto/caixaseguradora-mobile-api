@@ -18,4 +18,5 @@ Rails.application.routes.draw do
 
   get '/quotes'               => 'quotes#index'
   post '/quotes'              => 'quotes#create'
+  post '/quotes/complete'     => 'quotes#complete_quote'
 end
