@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_27_173627) do
+ActiveRecord::Schema.define(version: 2018_12_27_185408) do
 
   create_table "assistance_packages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 50, null: false
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2018_12_27_173627) do
     t.datetime "updated_at", null: false
     t.integer "calculate_for_years"
     t.decimal "total", precision: 10, scale: 2, default: "0.0"
-    t.index ["name"], name: "q_index", unique: true
+    t.index ["name"], name: "q_index"
     t.index ["user_id"], name: "index_quotes_on_user_id"
   end
 
