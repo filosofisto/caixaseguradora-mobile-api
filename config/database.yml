@@ -28,7 +28,7 @@ test:
 
 production:
   <<: *default
-  #username: csfabricproduser
-  #password: 123456
-  #database: csfabric_production
-  # database: db/production.sqlite3
+  database: ENV['DATABASE_URL']
+  username: ENV['DATABASE_USERNAME']
+  password: ENV['DATABASE_PASSWORDs']
+
