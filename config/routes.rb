@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   get '/coverages'            => 'coverages#index'
   get '/assistances'          => 'assistances#index'
 
+  get '/quotes'               => 'quotes#index'
   post '/quotes'              => 'quotes#create'
 end

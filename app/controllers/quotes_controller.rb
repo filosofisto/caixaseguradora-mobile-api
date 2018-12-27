@@ -1,7 +1,13 @@
 class QuotesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  before_action :authenticate_user, only: [:create]
+  before_action :authenticate_user, only: [:index, :create]
+
+  # GET /quotes
+  def index
+    @quotes = Quote.where(user_id: current_user.id)
+    json_response(@quotes)
+  end
 
   # POST /quotes
   def create
@@ -9,10 +15,10 @@ class QuotesController < ApplicationController
     copy_params[:user_id] = current_user.id
 
     ActiveRecord::Base.transaction do
-      @quote = Quote.create!(copy_params)
+      @quote = Quote.create!(copy_params.except(:category_properties))
 
       copy_params[:category_properties].each do |id|
-        @quote.category_properties.create!({quote_id: @quote.id, category_property_id: id})
+        @quote.category_properties << CategoryProperty.find(id)
       end
 
       json_response(@quote, :created)
