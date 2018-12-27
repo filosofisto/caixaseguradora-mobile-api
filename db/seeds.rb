@@ -24,7 +24,7 @@ Coverage.create(
           description: 'Se ocorrer um incêndio de qualquer natureza no imóvel, se um raio cair no terreno do imóvel ou uma explosão de qualquer natureza começar dentro da área de seu terreno, você poderá receber até 100% do valor dessa cobertura para reparar danos causados ao imóvel e aos seus bens.'
       },
       {
-          name: 'Impacto de veículos terrestres e queda de aeronaves', value: 0.0, franchise: 0.0, fix: true,
+          name: 'Impacto de veículos terrestres e queda de aeronaves', value: 7500.0, franchise: 0.0, fix: true,
           description: 'Cobre perdas e danos causados ao imóvel e outros bens pela colisão de veículos terrestres ou queda de aeronaves, inclusive incêndio e explosão causados por eles.'
       },
       {

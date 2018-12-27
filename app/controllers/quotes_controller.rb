@@ -26,18 +26,60 @@ class QuotesController < ApplicationController
     end
   end
 
-  # POST /quotes/complete
+  # PATCH /quotes/complete
   def complete_quote
     ActiveRecord::Base.transaction do
+      remove_all_coverages
       add_coverages_included
       add_coverages_selected
+
+      remove_all_assistances
       add_assistances_included
       add_assistances_selected
+
+      remove_all_assistance_packages
       add_assistance_packages_selected
+
+      calculate_total
+
+      json_response(@quote, :ok)
     end
   end
 
   private
+
+  def calculate_total
+    total = total_coverages + total_assistance_packages
+
+    @quote.calculate_for_years = complete_quote_params[:calculate_for_years]
+    @quote.total = total
+    @quote.save!
+  end
+
+  def total_coverages
+    tot = 0.0
+
+    @quote.coverages.each do |coverage|
+      tot += coverage.value
+    end
+
+    tot
+  end
+
+  def total_assistance_packages
+    tot = 0.0
+
+    @quote.assistance_packages.each do |assistance_package|
+      tot += assistance_package.value
+    end
+
+    tot
+  end
+
+  # Remove all coverages of this quote
+  def remove_all_coverages
+    @quote.coverages.destroy_all
+  end
 
   # Add coverages included
   def add_coverages_included
@@ -57,6 +99,11 @@ class QuotesController < ApplicationController
     end
   end
 
+  # Remove all asistances of this quote
+  def remove_all_assistances
+    @quote.assistances.destroy_all
+  end
+
   # Add assistances included
   def add_assistances_included
     Assistance.where(included: true).each do |assistance|
@@ -73,6 +120,11 @@ class QuotesController < ApplicationController
         @quote.assistances << Assistance.find(id)
       end
     end
+  end
+
+  # Remove all assistance packages of this quote
+  def remove_all_assistance_packages
+    @quote.assistance_packages.destroy_all
   end
 
   # Add assistance packages selected

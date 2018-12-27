@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get '/assistances'          => 'assistances#index'
   get '/assistance_packages'  => 'assistance_packages#index'
 
-  get '/quotes'               => 'quotes#index'
-  post '/quotes'              => 'quotes#create'
-  post '/quotes/complete'     => 'quotes#complete_quote'
+  get   '/quotes'              => 'quotes#index'
+  post  '/quotes'              => 'quotes#create'
+  patch '/quotes/complete'     => 'quotes#complete_quote'
 end
