@@ -97,7 +97,7 @@ Assistance.create(
             description: 'Quando necessário, enviamos um profissional para inspecionar e avaliar as áreas internas e externas do imóvel.'
         },
         {
-            name: ' Assistência tv, vídeo e som', limit_use: 1, included: false,
+            name: 'Assistência tv, vídeo e som', limit_use: 1, included: false,
             description: 'Essa assistência oferece profissionais para o consertar equipamentos como TV, Vídeo Cassete, Blu-ray, DVD, Aparelho de Som e Home-Theater.'
         },
         {
@@ -150,3 +150,33 @@ Assistance.create(
         }
     ]
 )
+
+AssistancePackage.create!(
+  [
+      { name: 'Assistência para sua casa e seus bens', value: 70.40 },
+      { name: 'Assistência para você', value: 71.25 },
+      { name: 'Assistência cães e gatos', value: 12.68 }
+  ]
+)
+
+assistance_package = AssistancePackage.find_by(name: 'Assistência para sua casa e seus bens')
+assistance_package.assistances << Assistance.find_by(name: 'Vistoria de imóvel para combater a dengue')
+assistance_package.assistances << Assistance.find_by(name: 'Assistência tv, vídeo e som')
+assistance_package.assistances << Assistance.find_by(name: 'Assistência fogão, geladeira, lavadora')
+assistance_package.assistances << Assistance.find_by(name: 'Manutenção residencial')
+assistance_package.assistances << Assistance.find_by(name: 'Assistência bike')
+
+assistance_package = AssistancePackage.find_by(name: 'Assistência para você')
+assistance_package.assistances << Assistance.find_by(name: 'Assistência nutricional')
+assistance_package.assistances << Assistance.find_by(name: 'Antivirus celular')
+assistance_package.assistances << Assistance.find_by(name: 'Cursos online')
+assistance_package.assistances << Assistance.find_by(name: 'Assistência informática')
+assistance_package.assistances << Assistance.find_by(name: 'Adaptação de imóvel para idosos')
+assistance_package.assistances << Assistance.find_by(name: 'Adaptação de imóvel para crianças')
+assistance_package.assistances << Assistance.find_by(name: 'Adaptação de imóvel para pessoa com deficiência')
+
+assistance_package = AssistancePackage.find_by(name: 'Assistência cães e gatos')
+assistance_package.assistances << Assistance.find_by(name: 'Orientações veterinárias por telefone')
+assistance_package.assistances << Assistance.find_by(name: 'Assistência pet (cães e gatos)')
+
+
