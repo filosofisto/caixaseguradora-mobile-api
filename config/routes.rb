@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   #get     '/users'              => 'users#index'
   get     '/users/current'      => 'users#current'
   post    '/users'              => 'users#create'
-  patch   '/users/password/:id' => 'users#update_password'
-  patch   '/users/:id'          => 'users#update'
+  #'patch   '/users/password/:id' => 'users#update_password'
+  #patch   '/users/:id'          => 'users#update'
   #delete  '/users/:id'          => 'users#destroy'
 
   get '/category_properties'  => 'category_properties#index'
